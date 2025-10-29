@@ -1,3 +1,5 @@
+this was forked from kickstart.nvim
+
 # kickstart.nvim
 
 ## Introduction
