@@ -9,6 +9,11 @@ return {
         sh = { 'shellcheck' },
         bash = { 'shellcheck' },
         zsh = { 'shellcheck' },
+        css = {},
+        scss = {},
+        json = {},
+        yaml = {},
+        markdown = {},
       },
       linters = {
         luacheck = {
