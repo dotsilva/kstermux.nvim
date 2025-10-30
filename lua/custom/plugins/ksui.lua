@@ -1,10 +1,4 @@
 return {
-  -- 2. DRESSING (from pcdressfix.lua)
-  {
-    'stevearc/dressing.nvim',
-    event = 'VeryLazy', -- default for kickstart ui plugins
-  },
-
   -- 3. SNACKS (Corrected as per :checkhealth)
   {
     'folke/snacks.nvim',
@@ -25,7 +19,7 @@ return {
     -- Plugin options
     opts = {
       -- You can uncomment and change the symbol if you want
-      symbol = '│',
+      symbol = '|',
       options = { try_as_border = true },
       -- Add this line to disable animation:
       draw = { animation = require('mini.indentscope').gen_animation.none() },
@@ -39,6 +33,7 @@ return {
       -- 2. Define the filetypes and buftypes to disable
       local disabled_fts = {
         alpha = true, -- This is the 'alpha-nvim' dashboard
+        oil = true,
         help = true,
         dashboard = true,
         lazy = true,
