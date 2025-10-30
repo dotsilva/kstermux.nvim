@@ -1,4 +1,3 @@
--- lua/custom/plugins/ksoil.lua
 return {
   'stevearc/oil.nvim',
 
@@ -7,12 +6,12 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 
   config = function()
-    -- 1. Configuração do 'oil'
+    -- 1. 'oil' Configuration
     require('oil').setup {
-      -- 2. FIX DO PROBLEMA DE "ESPAÇO MENOR" (SPLIT)
-      --    Esta é a configuração correta.
-      --    Quando 'false', o <CR> (Enter) abre o
-      --    arquivo na JANELA ATUAL, em vez de um split.
+      -- 2. FIX FOR THE "SMALLER SPACE" (SPLIT) PROBLEM
+      --    This is the correct configuration.
+      --    When 'false', <CR> (Enter) opens the
+      --    file in the CURRENT WINDOW, instead of a split.
       default_file_explorer = false,
 
       columns = {
@@ -21,24 +20,24 @@ return {
       view_options = {
         show_hidden = true,
       },
-      -- A seção 'keymaps' foi REMOVIDA
-      -- pois ela estava causando o erro.
+      -- The 'keymaps' section was REMOVED
+      -- as it was causing the error.
     }
 
-    -- 3. FIX DO PROBLEMA "NÃO FUNCIONOU MAIS" (Mantido da V3)
-    --    Isso garante que o oil abra no início.
+    -- 3. FIX FOR THE "STOPPED WORKING" PROBLEM (Kept from V3)
+    --    This ensures that oil opens on startup.
     local oil_on_start_group = vim.api.nvim_create_augroup('OilOnStart', { clear = true })
     vim.api.nvim_create_autocmd('VimEnter', {
       group = oil_on_start_group,
       pattern = '*',
       nested = true,
       callback = function()
-        -- Se nenhum arquivo foi passado como argumento
+        -- If no file was passed as an argument
         if vim.fn.argc() == 0 then
-          -- E se o buffer atual não é especial (lazy, mason, etc.)
+          -- And if the current buffer is not special (lazy, mason, etc.)
           local ftype = vim.bo.filetype
           if ftype ~= 'oil' and ftype ~= 'lazy' and ftype ~= 'mason' then
-            -- Então abra o 'oil' no diretório atual.
+            -- Then open 'oil' in the current directory.
             vim.cmd.Oil '.'
           end
         end
