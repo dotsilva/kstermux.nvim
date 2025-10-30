@@ -39,7 +39,7 @@ return {
       dashboard.section.buttons.opts.position = 'center'
       dashboard.section.buttons.opts.spacing = 1
 
-      -- footer com stats do lazy corrigido
+      -- footer fixed
       local ok, lazy = pcall(require, 'lazy')
       local footer_text = ' '
       if ok and lazy and type(lazy.stats) == 'function' then
@@ -60,13 +60,13 @@ return {
         dashboard.section.footer,
       }
 
-      -- esconder tildes, statusline, ruler e showmode enquanto o Alpha estiver aberto
+      -- hiddes details, statusline, ruler and showmode while alpha is open
       do
         local saved = {}
         vim.api.nvim_create_autocmd('User', {
           pattern = 'AlphaReady',
           callback = function()
-            -- salvar valores atuais
+            -- save currently values
             saved.laststatus = vim.o.laststatus
             saved.showtabline = vim.o.showtabline
             saved.fillchars = vim.o.fillchars
@@ -75,7 +75,7 @@ return {
             saved.statusline = vim.o.statusline
             saved.win_statusline = vim.wo.statusline
 
-            -- aplicar alterações para limpar a tela
+            -- apply fixes
             vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
             vim.o.laststatus = 0
             vim.o.showtabline = 0
@@ -84,7 +84,7 @@ return {
             vim.o.statusline = ''
             vim.wo.statusline = ''
 
-            -- restaura quando o buffer do alpha for descarregado
+            -- restores alpha buffer
             local bufnr = vim.api.nvim_get_current_buf()
             vim.api.nvim_create_autocmd('BufUnload', {
               buffer = bufnr,
