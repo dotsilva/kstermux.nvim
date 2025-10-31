@@ -13,6 +13,11 @@ return {
         'toml',
         'hyprlang',
         'zig',
+        'json',
+        'yaml',
+        'css',
+        'scss',
+        'ini',
       })
 
       -- Return the modified 'opts' table
