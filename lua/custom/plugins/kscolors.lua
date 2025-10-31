@@ -17,6 +17,9 @@ return {
         'hyprlang', -- <--- FIX APPLIED
         'javascript',
         'typescript',
+        'dosini',
+        'conf',
+        'properties',
       },
 
       -- 2. THE FIX:
