@@ -19,7 +19,7 @@ return {
     -- Plugin options
     opts = {
       -- You can uncomment and change the symbol if you want
-      symbol = '|',
+      symbol = '╎',
       options = { try_as_border = true },
       -- Add this line to disable animation:
       draw = { animation = require('mini.indentscope').gen_animation.none() },
