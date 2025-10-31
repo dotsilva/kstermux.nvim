@@ -44,7 +44,6 @@ return {
         -- ZIG PATCH:
         zls = {
           command = '/data/data/com.termux/files/usr/bin/zls',
-          args = { 'fmt' }, -- O comando é 'zls fmt'
         },
       },
 
@@ -60,7 +59,6 @@ return {
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
-        -- ZIG PATCH:
         zig = { 'zls' },
       },
     },
