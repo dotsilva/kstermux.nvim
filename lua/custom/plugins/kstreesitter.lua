@@ -11,7 +11,8 @@ return {
       vim.list_extend(opts.ensure_installed, {
         'bash',
         'toml',
-        'hyprlang', -- <<--- ADD THIS LINE
+        'hyprlang',
+        'zig',
       })
 
       -- Return the modified 'opts' table

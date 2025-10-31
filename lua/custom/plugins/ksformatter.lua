@@ -3,11 +3,11 @@
 -- This file OVERRIDES the default 'stevearc/conform.nvim'
 -- spec in init.lua.
 --
--- ### ADAPTED FOR TERMUX (v2) ###
+-- ### ADAPTED FOR TERMUX (v3 - ZIG Support) ###
 --
 -- 1. Added explicit paths for all system binaries.
--- 2. PRETTIERD PATCH: Added explicit path for prettierd
---    to stop using the Mason version.
+-- 2. PRETTIERD PATCH: Added explicit path for prettierd.
+-- 3. ZIG PATCH: Added 'zls' formatter.
 --
 
 return {
@@ -38,13 +38,17 @@ return {
         taplo = {
           command = '/data/data/com.termux/files/usr/bin/taplo',
         },
-        -- PRETTIERD PATCH:
         prettierd = {
           command = '/data/data/com.termux/files/usr/bin/prettierd',
         },
+        -- ZIG PATCH:
+        zls = {
+          command = '/data/data/com.termux/files/usr/bin/zls',
+          args = { 'fmt' }, -- O comando é 'zls fmt'
+        },
       },
 
-      -- Formatter list by filetype (from your original ksformatter.lua)
+      -- Formatter list by filetype
       formatters_by_ft = {
         lua = { 'stylua' },
         sh = { 'shfmt' },
@@ -56,6 +60,8 @@ return {
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
+        -- ZIG PATCH:
+        zig = { 'zls' },
       },
     },
   },

@@ -3,15 +3,15 @@
 -- This file completely OVERRIDES the default 'neovim/nvim-lspconfig'
 -- spec in init.lua.
 --
--- ### ADAPTED FOR TERMUX (v6 - Final) ###
+-- ### ADAPTED FOR TERMUX (v7 - ZIG Support) ###
 --
--- 1. Added 'mason = false' for 'lua_ls', 'bashls', 'taplo'
---    AND 'hyprls' to force use of system binaries.
+-- 1. Added 'mason = false' for 'lua_ls', 'bashls', 'taplo', 'hyprls'
+--    AND 'zls' to force use of system binaries.
 --
 -- 2. Cleaned 'mason-tool-installer' list COMPLETELY.
 --    Mason will no longer install any LSPs or tools.
 --
--- 3. Added 'hyprls' to the explicit enable list (Step 4).
+-- 3. Added 'hyprls' and 'zls' to the explicit enable list (Step 4).
 --
 
 return {
@@ -89,8 +89,10 @@ return {
         taplo = {
           mason = false,
         },
-        -- HYPRLS PATCH:
         hyprls = {
+          mason = false,
+        },
+        zls = {
           mason = false,
         },
       }
@@ -126,8 +128,8 @@ return {
       -- 4. ### TERMUX FIX ###
       -- EXPLICITLY SET UP & ENABLE EXTERNALLY-MANAGED LSPs
       --
-      -- HYPRLS PATCH: Adicionado 'hyprls' a esta lista
-      local external_servers = { 'lua_ls', 'bashls', 'taplo', 'hyprls' }
+      -- ZIG PATCH: Adicionado 'zls' a esta lista
+      local external_servers = { 'lua_ls', 'bashls', 'taplo', 'hyprls', 'zls' }
       for _, server_name in ipairs(external_servers) do
         local server_opts = servers[server_name] or {}
         server_opts.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_opts.capabilities or {})
