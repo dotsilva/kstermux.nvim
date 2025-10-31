@@ -41,10 +41,9 @@ return {
         prettierd = {
           command = '/data/data/com.termux/files/usr/bin/prettierd',
         },
-        -- ZIG PATCH:
-        zls = {
-          command = '/data/data/com.termux/files/usr/bin/zls',
-          args = { 'fmt' },
+        zigfmt = {
+          command = '/data/data/com.termux/files/usr/bin/zig',
+          args = { 'fmt', '--stdin' },
           stdin = true,
         },
       },
@@ -61,7 +60,7 @@ return {
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
-        zig = { 'zls' },
+        zig = { 'zigfmt' },
       },
     },
   },
