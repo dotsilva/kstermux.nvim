@@ -31,7 +31,7 @@ return {
 
         -- Just to be sure, we also explicitly enable:
         rgb_fn = true,
-        names = true,
+        names = false,
       },
     }
   end,
