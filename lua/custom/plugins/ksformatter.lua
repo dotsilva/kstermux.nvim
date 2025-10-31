@@ -44,6 +44,8 @@ return {
         -- ZIG PATCH:
         zls = {
           command = '/data/data/com.termux/files/usr/bin/zls',
+          args = { 'fmt' },
+          stdin = true,
         },
       },
 
