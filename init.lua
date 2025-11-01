@@ -702,6 +702,7 @@ require('lazy').setup({
         --
 
         lua_ls = {
+          mason = false,
           -- cmd = { ... },
           -- filetypes = { ... },
           -- capabilities = {},
@@ -732,7 +733,6 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -783,8 +783,39 @@ require('lazy').setup({
           }
         end
       end,
+      formatters = {
+        stylua = {
+          command = '/data/data/com.termux/files/usr/bin/stylua',
+        },
+        shfmt = {
+          command = '/data/data/com.termux/files/usr/bin/shfmt',
+        },
+        taplo = {
+          command = '/data/data/com.termux/files/usr/bin/taplo',
+        },
+        prettierd = {
+          command = '/data/data/com.termux/files/usr/bin/prettierd',
+        },
+        zigfmt = {
+          command = '/data/data/com.termux/files/usr/bin/zig',
+          args = { 'fmt', '--stdin' },
+          stdin = true,
+        },
+      },
+
+      -- Formatter list by filetype
       formatters_by_ft = {
         lua = { 'stylua' },
+        sh = { 'shfmt' },
+        bash = { 'shfmt' },
+        zsh = { 'shfmt' },
+        toml = { 'taplo' },
+        css = { 'prettierd' },
+        json = { 'prettierd' },
+        yaml = { 'prettierd' },
+        markdown = { 'prettierd' },
+        zig = { 'zigfmt' },
+      },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -939,7 +970,24 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'zig',
+        'diff',
+        'hyprlang',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'json',
+        'yaml',
+        'css',
+        'ini',
+        'toml',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -969,9 +1017,9 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+   require 'kickstart.plugins.indent_line',
+   require 'kickstart.plugins.lint',
+   require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 

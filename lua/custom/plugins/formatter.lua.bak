@@ -1,14 +1,8 @@
 -- lua/custom/plugins/termux-formatter-fix.lua
---
 -- This file OVERRIDES the default 'stevearc/conform.nvim'
 -- spec in init.lua.
---
--- ### ADAPTED FOR TERMUX (v3 - ZIG Support) ###
---
+--  ADAPTED FOR TERMUX
 -- 1. Added explicit paths for all system binaries.
--- 2. PRETTIERD PATCH: Added explicit path for prettierd.
--- 3. ZIG PATCH: Added 'zls' formatter.
---
 
 return {
   {
@@ -56,7 +50,6 @@ return {
         zsh = { 'shfmt' },
         toml = { 'taplo' },
         css = { 'prettierd' },
-        scss = { 'prettierd' },
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
