@@ -5,6 +5,17 @@ return {
   priority = 1000,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 
+  keys = {
+    -- open oil
+    {
+      '<leader>o',
+      function()
+        require('oil').open()
+      end,
+      desc = 'Open [O]il Explorer',
+    },
+  },
+
   config = function()
     -- 1. 'oil' Configuration
     require('oil').setup {
@@ -20,11 +31,12 @@ return {
       view_options = {
         show_hidden = true,
       },
-      -- The 'keymaps' section was REMOVED
-      -- as it was causing the error.
+      -- same <leader>o closes oil
+      keymaps = {
+        ['<leader>o'] = 'actions.close',
+      },
     }
 
-    -- 3. FIX FOR THE "STOPPED WORKING" PROBLEM (Kept from V3)
     --    This ensures that oil opens on startup.
     local oil_on_start_group = vim.api.nvim_create_augroup('OilOnStart', { clear = true })
     vim.api.nvim_create_autocmd('VimEnter', {
