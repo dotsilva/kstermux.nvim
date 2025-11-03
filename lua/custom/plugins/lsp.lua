@@ -100,7 +100,7 @@ return {
       --
       -- 2. MASON-TOOL-INSTALLER (TERMUX PATCHED)
       --
-      local ensure_installed = {}
+      local ensure_installed = { 'pgformatter' }
       require('mason-tool-installer').setup {
         ensure_installed = ensure_installed,
       }
