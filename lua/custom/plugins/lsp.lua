@@ -1,4 +1,4 @@
--- lua/custom/plugins/kslsp.lua
+-- lua/custom/plugins/lsp.lua
 --
 -- This file completely OVERRIDES the default 'neovim/nvim-lspconfig'
 -- spec in init.lua.
@@ -8,6 +8,7 @@
 -- 1. Added 'mason = false'
 -- 2. Cleaned 'mason-tool-installer' list COMPLETELY.
 -- Mason will no longer install any LSPs or tools.
+-- Except elixirls
 --
 --
 
@@ -18,14 +19,41 @@ return {
     config = function()
       -- Default lsp-attach autocmd (from kickstart)
       vim.api.nvim_create_autocmd('LspAttach', {
--- [[ ... (rest of on_attach function) ... ]]
+        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        callback = function(event)
+          local map = function(keys, func, desc, mode)
+            mode = mode or 'n'
+            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
+          -- Add keymaps from init.lua's on_attach
+          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
         end,
       })
 
       -- Diagnostic Config (from kickstart)
       vim.diagnostic.config {
--- [[ ... (rest of diagnostic config) ... ]]
+        severity_sort = true,
+        float = { border = 'rounded', source = 'if_many' },
+        underline = { severity = vim.diagnostic.severity.ERROR },
+        signs = vim.g.have_nerd_font and {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = ' ｪ ',
+            [vim.diagnostic.severity.INFO] = '郷 ',
+            [vim.diagnostic.severity.HINT] = '幻 ',
+          },
+        } or {},
+        virtual_text = {
+          source = 'if_many',
+          spacing = 2,
         },
       }
 
@@ -104,7 +132,7 @@ return {
       --
       -- 4. ### TERMUX FIX ###
       -- EXPLICITLY SET UP & ENABLE EXTERNALLY-MANAGED LSPs
-      -- (This list should NOT include 'elixirls')
+      -- (This list should NOT include 'elixirls' or 'zls')
       --
       local external_servers = { 'lua_ls', 'bashls', 'taplo', 'hyprls', 'marksman' }
       for _, server_name in ipairs(external_servers) do
