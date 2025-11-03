@@ -813,7 +813,7 @@ require('lazy').setup({
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
-        elixir = { 'mix', 'elixirls' },
+        elixir = { 'mix' },
         eex = { 'mix' },
         heex = { 'mix' },
         -- Conform can also run multiple formatters sequentially

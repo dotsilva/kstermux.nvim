@@ -1,4 +1,4 @@
--- lua/custom/plugins/lsp.lua
+-- lua/custom/plugins/kslsp.lua
 --
 -- This file completely OVERRIDES the default 'neovim/nvim-lspconfig'
 -- spec in init.lua.
@@ -8,7 +8,6 @@
 -- 1. Added 'mason = false'
 -- 2. Cleaned 'mason-tool-installer' list COMPLETELY.
 -- Mason will no longer install any LSPs or tools.
--- Except elixirls
 --
 --
 
@@ -90,36 +89,28 @@ return {
         hyprls = {
           mason = false,
         },
-        --[[ REMOVED ZLS
         zls = {
           mason = false,
         },
-        ]]
         marksman = {
           mason = false,
         },
-        -- ADDED: elixirls will be managed by Mason,
-        -- so we do NOT set 'mason = false' or 'cmd'
-        elixirls = {},
       }
 
       --
       -- 2. MASON-TOOL-INSTALLER (TERMUX PATCHED)
       --
-      -- ADDED 'elixirls' for installation by Mason
-      local ensure_installed = { 'elixirls' }
+      local ensure_installed = {}
       require('mason-tool-installer').setup {
         ensure_installed = ensure_installed,
       }
 
       --
-      -- 3. MASON-LSPCONFIG HANDLER (Modified to include elixirls)
+      -- 3. MASON-LSPCONFIG HANDLER (For Mason-managed servers)
       --
       require('mason-lspconfig').setup {
-        -- ADDED 'elixirls' for setup by mason-lspconfig
-        ensure_installed = { 'elixirls' },
-        -- Enable automatic installation ONLY for elixirls
-        automatic_installation = true,
+        ensure_installed = {},
+        automatic_installation = false,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -132,9 +123,8 @@ return {
       --
       -- 4. ### TERMUX FIX ###
       -- EXPLICITLY SET UP & ENABLE EXTERNALLY-MANAGED LSPs
-      -- (This list should NOT include 'elixirls' or 'zls')
       --
-      local external_servers = { 'lua_ls', 'bashls', 'taplo', 'hyprls', 'marksman' }
+      local external_servers = { 'lua_ls', 'bashls', 'taplo', 'hyprls', 'zls', 'marksman' }
       for _, server_name in ipairs(external_servers) do
         local server_opts = servers[server_name] or {}
         server_opts.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_opts.capabilities or {})
