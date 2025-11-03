@@ -13,6 +13,7 @@ return {
         css = { 'stylelint' },
         json = { 'jsonlint' },
         yaml = { 'yamllint' },
+        elixir = { 'credo' },
       }
 
       local luacheck = lint.linters.luacheck

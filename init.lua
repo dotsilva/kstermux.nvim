@@ -795,9 +795,9 @@ require('lazy').setup({
         prettierd = {
           command = '/data/data/com.termux/files/usr/bin/prettierd',
         },
-        zigfmt = {
-          command = '/data/data/com.termux/files/usr/bin/zig',
-          args = { 'fmt', '--stdin' },
+        mix = {
+          command = '/data/data/com.termux/files/usr/bin/mix',
+          args = { 'format', '-' },
           stdin = true,
         },
       },
@@ -813,7 +813,9 @@ require('lazy').setup({
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
-        zig = { 'zigfmt' },
+        elixir = { 'mix', 'elixirls' },
+        eex = { 'mix' },
+        heex = { 'mix' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -970,7 +972,6 @@ require('lazy').setup({
     opts = {
       ensure_installed = {
         'bash',
-        'zig',
         'diff',
         'hyprlang',
         'lua',
@@ -985,6 +986,9 @@ require('lazy').setup({
         'css',
         'ini',
         'toml',
+        'elixir',
+        'eex',
+        'heex',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
