@@ -992,6 +992,7 @@ require('lazy').setup({
         'elixir',
         'eex',
         'heex',
+        'sql',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
