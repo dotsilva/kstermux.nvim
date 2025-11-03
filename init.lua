@@ -708,6 +708,9 @@ require('lazy').setup({
           -- capabilities = {},
           settings = {
             Lua = {
+              runtime = {
+                version = 'LuaJIT',
+              },
               completion = {
                 callSnippet = 'Replace',
               },
