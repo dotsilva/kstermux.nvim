@@ -818,7 +818,7 @@ require('lazy').setup({
         json = { 'prettierd' },
         yaml = { 'prettierd' },
         markdown = { 'prettierd' },
-        elixir = { 'mix' },
+        elixir = { 'mix', 'elixirls' },
         eex = { 'mix' },
         heex = { 'mix' },
         sql = { 'pgformatter' },
